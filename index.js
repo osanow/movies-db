@@ -4,11 +4,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const { errorHandler } = require('./middlewares/errorHandler');
+const { allowContentType } = require('./tools/allowContentType');
 const { NotFoundError } = require('./tools/errors');
 
 const app = express();
 
 app.use(cors());
+
+app.use(allowContentType('json'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

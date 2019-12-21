@@ -27,7 +27,8 @@ const builtDefinitions = {
 
 const errorTypes = [
     ['NotFoundError', 404, 'Not Found'],
-    ['BadRequestError', 400, 'Bad Request', true]
+    ['BadRequestError', 400, 'Bad Request'],
+    ['InvalidContentTypeError', 415, 'Invalid Content Type']
 ];
 
 errorTypes.forEach(([typeName, code, name]) => {
