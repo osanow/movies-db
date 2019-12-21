@@ -31,7 +31,4 @@ const errorHandler = (err, req, res, next) => {
     }
 };
 
-module.exports = {
-    errorHandler,
-    DEFAULT_ERROR_STATUS
-};
+module.exports = errorHandler;

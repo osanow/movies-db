@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/', (req, res) => res.send('TEST'));
+app.use(require('./routes'));
 
 app.use((req, res, next) => {
     next(new NotFoundError('', 'Express ran out of middlewares.'));
@@ -21,4 +21,6 @@ app.use((req, res, next) => {
 
 app.use(errorHandler);
 
-app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}.`));
+const { PORT } = process.env;
+
+app.listen(PORT, () => console.log(`App listening on port ${PORT}.`));
