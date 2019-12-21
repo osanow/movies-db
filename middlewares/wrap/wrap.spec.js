@@ -1,4 +1,4 @@
-const { wrap } = require('./wrap');
+const wrap = require('./wrap');
 
 describe('wrap', () => {
     it('should pass args to function and resolve', () => {

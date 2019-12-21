@@ -25,7 +25,10 @@ const builtDefinitions = {
     ExtendableError
 };
 
-const errorTypes = [['NotFoundError', 404, 'Not Found']];
+const errorTypes = [
+    ['NotFoundError', 404, 'Not Found'],
+    ['BadRequestError', 400, 'Bad Request', true]
+];
 
 errorTypes.forEach(([typeName, code, name]) => {
     builtDefinitions[typeName] = genericErrorFactory(name, code);
