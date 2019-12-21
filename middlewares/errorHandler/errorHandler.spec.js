@@ -2,9 +2,9 @@ const { DEFAULT_ERROR_MESSAGE, DEFAULT_ERROR_STATUS, DEFAULT_ERROR_DETAILS } = r
 const errorHandler = require('./errorHandler');
 
 describe('errorHandler', () => {
-    let mockedReq;
-    let mockedRes;
-    let mockedNext;
+    let req;
+    let res;
+    let next;
 
     const initialConsole = global.console;
     const mockedConsole = {
@@ -12,15 +12,15 @@ describe('errorHandler', () => {
     };
 
     beforeEach(() => {
-        mockedReq = {};
-        mockedRes = {
+        req = {};
+        res = {
             statusCode: null,
             status(statusCode) {
                 this.statusCode = statusCode;
             },
             json: jest.fn()
         };
-        mockedNext = {};
+        next = jest.fn();
 
         global.console = mockedConsole;
     });
@@ -30,27 +30,27 @@ describe('errorHandler', () => {
     });
 
     it('should fallback to default response status', () => {
-        jest.spyOn(mockedRes, 'status');
+        jest.spyOn(res, 'status');
         const err = {};
 
-        errorHandler(err, mockedReq, mockedRes, mockedNext);
+        errorHandler(err, req, res, next);
 
-        expect(mockedRes.status).toHaveBeenCalledWith(DEFAULT_ERROR_STATUS);
+        expect(res.status).toHaveBeenCalledWith(DEFAULT_ERROR_STATUS);
     });
 
     it('should save given error response status', () => {
-        jest.spyOn(mockedRes, 'status');
+        jest.spyOn(res, 'status');
         const err = { status: 404 };
 
-        errorHandler(err, mockedReq, mockedRes, mockedNext);
+        errorHandler(err, req, res, next);
 
-        expect(mockedRes.status).toHaveBeenCalledWith(404);
+        expect(res.status).toHaveBeenCalledWith(404);
     });
 
     it('should fallback to default details if not provided any', () => {
         const err = {};
 
-        errorHandler(err, mockedReq, mockedRes, mockedNext);
+        errorHandler(err, req, res, next);
 
         expect(mockedConsole.error).lastCalledWith(expect.stringContaining(DEFAULT_ERROR_DETAILS));
     });
@@ -58,7 +58,7 @@ describe('errorHandler', () => {
     it('should fallback to default error message if not provided any', () => {
         const err = {};
 
-        errorHandler(err, mockedReq, mockedRes, mockedNext);
+        errorHandler(err, req, res, next);
 
         expect(mockedConsole.error).lastCalledWith(expect.stringContaining(DEFAULT_ERROR_MESSAGE));
     });
@@ -66,19 +66,19 @@ describe('errorHandler', () => {
     it('should response with "success: false" and error message', () => {
         const err = { message: 'some error message' };
 
-        errorHandler(err, mockedReq, mockedRes, mockedNext);
+        errorHandler(err, req, res, next);
 
-        expect(mockedRes.json).lastCalledWith({ success: false, message: err.message });
+        expect(res.json).lastCalledWith({ success: false, message: err.message });
     });
 
     it('should not include error details & status & stack in response', () => {
         const err = { status: 404, message: 'some error message', details: 'details', stack: 'stack' };
 
-        errorHandler(err, mockedReq, mockedRes, mockedNext);
+        errorHandler(err, req, res, next);
 
-        expect(mockedRes.json).not.lastCalledWith(expect.objectContaining({ details: err.details }));
-        expect(mockedRes.json).not.lastCalledWith(expect.objectContaining({ error: err.status }));
-        expect(mockedRes.json).not.lastCalledWith(expect.objectContaining({ stack: err.stack }));
+        expect(res.json).not.lastCalledWith(expect.objectContaining({ details: err.details }));
+        expect(res.json).not.lastCalledWith(expect.objectContaining({ error: err.status }));
+        expect(res.json).not.lastCalledWith(expect.objectContaining({ stack: err.stack }));
     });
 
     describe('in development environment', () => {
@@ -95,11 +95,11 @@ describe('errorHandler', () => {
         it('should include error details & status & stack in response', () => {
             const err = { status: 404, message: 'some error message', details: 'details', stack: 'stack' };
 
-            errorHandler(err, mockedReq, mockedRes, mockedNext);
+            errorHandler(err, req, res, next);
 
-            expect(mockedRes.json).lastCalledWith(expect.objectContaining({ details: err.details }));
-            expect(mockedRes.json).lastCalledWith(expect.objectContaining({ error: err.status }));
-            expect(mockedRes.json).lastCalledWith(expect.objectContaining({ stack: err.stack }));
+            expect(res.json).lastCalledWith(expect.objectContaining({ details: err.details }));
+            expect(res.json).lastCalledWith(expect.objectContaining({ error: err.status }));
+            expect(res.json).lastCalledWith(expect.objectContaining({ stack: err.stack }));
         });
     });
 
@@ -117,11 +117,11 @@ describe('errorHandler', () => {
                 details: 'some error details'
             };
 
-            mockedReq.method = 'get';
-            mockedReq.url = '/test-url';
-            mockedRes.statusCode = 404;
+            req.method = 'get';
+            req.url = '/test-url';
+            res.statusCode = 404;
 
-            errorHandler(err, mockedReq, mockedRes, mockedNext);
+            errorHandler(err, req, res, next);
 
             expect(mockedConsole.error).lastCalledWith(expect.stringContaining(data.value));
         });
