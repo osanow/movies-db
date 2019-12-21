@@ -1,13 +1,20 @@
 const express = require('express');
+const { wrap } = require('../middlewares/wrap');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
-    res.json({});
-});
+router.post(
+    '/',
+    wrap(async (req, res) => {
+        res.json({});
+    })
+);
 
-router.get('/', (req, res) => {
-    res.json({});
-});
+router.get(
+    '/',
+    wrap(async (req, res) => {
+        res.json({});
+    })
+);
 
 module.exports = router;
