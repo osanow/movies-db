@@ -1,5 +1,5 @@
 const { DEFAULT_ERROR_MESSAGE, DEFAULT_ERROR_STATUS, DEFAULT_ERROR_DETAILS } = require('../../config/errorHandler');
-const { errorHandler } = require('./errorHandler');
+const errorHandler = require('./errorHandler');
 
 describe('errorHandler', () => {
     let mockedReq;
