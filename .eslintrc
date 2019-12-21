@@ -7,6 +7,7 @@
   "env": {
     "node": true,
     "jest": true,
+    "jest/globals": true,
     "mongo": true
   },
   "globals": {
@@ -18,7 +19,8 @@
   },
   "plugins": [
     "import",
-    "security"
+    "security",
+    "jest"
   ],
   "parserOptions": {
     "ecmaVersion": 2019,

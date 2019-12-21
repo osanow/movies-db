@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const { errorHandler } = require('./middlewares/errorHandler');
 const { NotFoundError } = require('./tools/errors');
 
 const app = express();
@@ -18,9 +19,6 @@ app.use((req, res, next) => {
     next(new NotFoundError('', 'Express ran out of middlewares.'));
 });
 
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-    res.status(500).send(err.message || 'Unexpected error occurred, please try again later.');
-});
+app.use(errorHandler);
 
 app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}.`));
