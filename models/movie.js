@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const schema = new Schema({
-    title: { index: true, unique: true },
-    imdbid: { index: true, unique: true },
+    title: { type: String, index: true, unique: true },
+    imdbid: { type: String, index: true, unique: true },
     year: { type: String },
     rated: { type: String },
     released: { type: String },
