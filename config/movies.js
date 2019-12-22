@@ -1,3 +1,3 @@
 module.exports = {
-    requiredMovieParams: ['title']
+    requiredMovieParams: ['title', 'id']
 };
