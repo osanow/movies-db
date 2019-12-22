@@ -1,3 +1,26 @@
 module.exports = {
-    requiredMovieParams: ['title', 'id']
+    requiredMovieParams: ['title', 'id'],
+    movieProperties: [
+        'year',
+        'rated',
+        'released',
+        'runtime',
+        'genre',
+        'director',
+        'writer',
+        'actors',
+        'plot',
+        'language',
+        'country',
+        'awards',
+        'metascore',
+        'imdbrating',
+        'imdbvotes',
+        'imdbid',
+        'type',
+        'dvd',
+        'boxoffice',
+        'production',
+        'website'
+    ]
 };
