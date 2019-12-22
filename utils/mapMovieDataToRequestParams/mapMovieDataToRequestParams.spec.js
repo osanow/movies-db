@@ -100,11 +100,11 @@ describe('mapMovieDataToRequestParams', () => {
 
         const searchQuery = mapMovieDataToRequestParams(movieData);
 
-        expect(searchQuery).toBe(expect.stringContaining('i='));
-        expect(searchQuery).toBe(expect.stringContaining('t='));
-        expect(searchQuery).toBe(expect.stringContaining('y='));
-        expect(searchQuery).toBe(expect.stringContaining('type='));
-        expect(searchQuery).toBe(expect.stringContaining('plot='));
+        expect(searchQuery).toEqual(expect.stringContaining('i='));
+        expect(searchQuery).toEqual(expect.stringContaining('t='));
+        expect(searchQuery).toEqual(expect.stringContaining('y='));
+        expect(searchQuery).toEqual(expect.stringContaining('type='));
+        expect(searchQuery).toEqual(expect.stringContaining('plot='));
     });
 
     it('should not include undefined values', () => {
