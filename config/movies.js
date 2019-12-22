@@ -22,5 +22,7 @@ module.exports = {
         'boxoffice',
         'production',
         'website'
-    ]
+    ],
+    validMovieTypes: ['movie', 'series', 'episode'],
+    validPlotTypes: ['short', 'full']
 };
