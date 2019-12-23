@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const apiRequestBodySizeLimiter = require('./libs/apiRequestBodySizeLimiter');
 const apiRequestRateLimiter = require('./libs/apiRequestRateLimiter');
 const { connectWithRetry } = require('./libs/mongoose');
 const { errorHandler } = require('./middlewares/errorHandler');
@@ -15,8 +16,8 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(cors());
 app.use(allowContentType('json'));
+app.use(apiRequestBodySizeLimiter);
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 app.use('/', apiRequestRateLimiter, require('./routes'));
 
