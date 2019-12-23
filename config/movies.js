@@ -1,5 +1,4 @@
 module.exports = {
-    requiredMovieParams: ['title', 'id'],
     movieProperties: [
         'year',
         'rated',
@@ -23,6 +22,8 @@ module.exports = {
         'production',
         'website'
     ],
+    requiredMovieParams: ['title', 'id'],
     validMovieTypes: ['movie', 'series', 'episode'],
-    validPlotTypes: ['short', 'full']
+    validPlotTypes: ['short', 'full'],
+    notFoundMessage: 'Not found any movie based on given data.'
 };
