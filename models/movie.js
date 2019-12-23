@@ -28,8 +28,8 @@ const schema = new Schema({
     poster: { type: String },
     ratings: [
         {
-            source: { type: String },
-            value: { type: String }
+            Source: { type: String },
+            Value: { type: String }
         }
     ]
 });

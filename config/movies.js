@@ -1,5 +1,7 @@
 module.exports = {
     movieProperties: [
+        'title',
+        'imdbid',
         'year',
         'rated',
         'released',
@@ -15,12 +17,13 @@ module.exports = {
         'metascore',
         'imdbrating',
         'imdbvotes',
-        'imdbid',
         'type',
         'dvd',
         'boxoffice',
         'production',
-        'website'
+        'website',
+        'poster',
+        'ratings'
     ],
     requiredMovieParams: ['title', 'id'],
     validMovieTypes: ['movie', 'series', 'episode'],

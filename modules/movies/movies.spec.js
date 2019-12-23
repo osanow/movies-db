@@ -1,6 +1,7 @@
 const { mapMovieDataToRequestParams } = require('../../utils/mapMovieDataToRequestParams');
-const { NotFoundError } = require('../../tools/errors');
+const { NotFoundError, ExistentError } = require('../../tools/errors');
 const { omdbGet } = require('../../utils/omdbGet');
+const { findMovie } = require('../../utils/findMovie');
 const config = require('../../config/movies');
 const { create } = require('./movies');
 
@@ -18,12 +19,16 @@ jest.mock(
         }
 );
 
+jest.mock('../../utils/findMovie', () => ({
+    findMovie: jest.fn(async () => {})
+}));
+
 jest.mock('../../utils/mapMovieDataToRequestParams', () => ({
     mapMovieDataToRequestParams: jest.fn()
 }));
 
 jest.mock('../../utils/omdbGet', () => ({
-    omdbGet: jest.fn()
+    omdbGet: jest.fn(async () => {})
 }));
 
 jest.mock('../../utils/getMovieProperties', () => ({
@@ -53,6 +58,18 @@ describe('modules -> movies -> create', () => {
         omdbGet.mockImplementationOnce(async () => ({ data: { Response: 'False' } }));
 
         await expect(create(movieData)).rejects.toEqual(new NotFoundError(config.notFoundMessage));
+    });
+
+    it('should throw ExistentError if movie with given data already exists', async () => {
+        const movieData = {
+            title: 'movie'
+        };
+
+        mapMovieDataToRequestParams.mockImplementationOnce(() => 'title=movie');
+        omdbGet.mockImplementationOnce(async () => ({ data: { Response: 'True' } }));
+        findMovie.mockImplementationOnce(() => ({ title: 'some movie' }));
+
+        await expect(create(movieData)).rejects.toEqual(new ExistentError(config.existentMessage));
     });
 
     it('should return saved movie', async () => {

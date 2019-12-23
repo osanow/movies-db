@@ -1,7 +1,8 @@
 const Movie = require('../../models/movie');
 const { mapMovieDataToRequestParams } = require('../../utils/mapMovieDataToRequestParams');
 const { getMovieProperties } = require('../../utils/getMovieProperties');
-const { NotFoundError } = require('../../tools/errors');
+const { findMovie } = require('../../utils/findMovie');
+const { NotFoundError, ExistentError } = require('../../tools/errors');
 const { omdbGet } = require('../../utils/omdbGet');
 const config = require('../../config/movies');
 
@@ -14,6 +15,12 @@ const create = async movieData => {
     }
 
     const movieProperties = getMovieProperties(data);
+    const alreadyExists = !!(await findMovie(movieProperties));
+
+    if (alreadyExists) {
+        throw new ExistentError(config.existentMessage);
+    }
+
     const createdMovie = new Movie(movieProperties);
 
     return createdMovie.save();
