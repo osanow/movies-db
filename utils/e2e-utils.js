@@ -4,9 +4,7 @@ const Movie = require('../models/movie');
 const Comment = require('../models/comment');
 
 async function createServer() {
-    const server = request.agent(require('../index'));
-
-    await cleanup();
+    const server = request.agent(require('../app'));
 
     async function createMovie(props) {
         return new Movie(props).save();
