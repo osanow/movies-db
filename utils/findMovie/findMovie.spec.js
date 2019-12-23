@@ -20,15 +20,15 @@ describe('findMovie', () => {
         expect(Movie.findOne).toBeCalledWith({ title: { $eq: 'title' } });
     });
 
-    it('should find movie by title if given', async () => {
+    it('should find movie by imdbid if given', async () => {
         const movieData = {
-            id: 'id'
+            imdbid: 'imdbid'
         };
 
         await findMovie(movieData);
 
         expect(Movie.findOne).toBeCalledTimes(1);
-        expect(Movie.findOne).toBeCalledWith({ imdbid: { $eq: 'id' } });
+        expect(Movie.findOne).toBeCalledWith({ imdbid: { $eq: 'imdbid' } });
     });
 
     it('should find movie by title if title and id given', async () => {
