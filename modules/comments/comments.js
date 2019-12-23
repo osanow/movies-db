@@ -6,6 +6,11 @@ const create = async commentData => {
     return createdComment.save();
 };
 
+const show = async () => {
+    return Comment.find({});
+};
+
 module.exports = {
-    create
+    create,
+    show
 };

@@ -20,7 +20,9 @@ router.post(
 router.get(
     '/',
     wrap(async (req, res) => {
-        res.status(200).json({});
+        const existentComments = await comments.show();
+
+        res.status(200).json({ success: true, comments: existentComments });
     })
 );
 
