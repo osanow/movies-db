@@ -4,7 +4,7 @@ const { TooManyRequestsError } = require('../tools/errors');
 
 const { API_LIMITER_MAX_REQUESTS, API_LIMITER_REQUESTS_PERIOD } = process.env;
 
-const apiLimiter = rateLimit({
+const apiRequestRateLimiter = rateLimit({
     windowMs: API_LIMITER_REQUESTS_PERIOD,
     max: API_LIMITER_MAX_REQUESTS,
     message: {
@@ -14,4 +14,4 @@ const apiLimiter = rateLimit({
     }
 });
 
-module.exports = apiLimiter;
+module.exports = apiRequestRateLimiter;
