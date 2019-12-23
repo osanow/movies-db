@@ -6,7 +6,6 @@
   "engines": {
     "node": "12.14.0"
   },
-  "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
@@ -31,6 +30,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.0.0",
+    "http": "0.0.0",
     "mongoose": "^5.8.2",
     "nodemon": "^2.0.2",
     "query-string": "^6.9.0",
