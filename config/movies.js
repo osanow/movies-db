@@ -25,5 +25,7 @@ module.exports = {
     requiredMovieParams: ['title', 'id'],
     validMovieTypes: ['movie', 'series', 'episode'],
     validPlotTypes: ['short', 'full'],
-    notFoundMessage: 'Not found any movie based on given data.'
+    notFoundMessage: 'Not found any movie based on given data.',
+    existentMessage: 'Movie with given params already exists.',
+    invalidMovieDataMessage: 'Invalid movie data given.'
 };
