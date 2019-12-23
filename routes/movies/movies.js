@@ -23,7 +23,9 @@ router.post(
 router.get(
     '/',
     wrap(async (req, res) => {
-        res.status(200).json({});
+        const existentMovies = await movies.show();
+
+        res.status(200).json({ success: true, movies: existentMovies });
     })
 );
 

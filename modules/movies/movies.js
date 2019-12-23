@@ -26,6 +26,11 @@ const create = async movieData => {
     return createdMovie.save();
 };
 
+const show = async () => {
+    return Movie.find({});
+};
+
 module.exports = {
-    create
+    create,
+    show
 };
