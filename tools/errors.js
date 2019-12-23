@@ -30,7 +30,8 @@ const errorTypes = [
     ['BadRequestError', 400, 'Bad Request'],
     ['InvalidContentTypeError', 415, 'Invalid Content Type'],
     ['ExternalServiceUnavailableError', 503, 'External Service Unavailable'],
-    ['ExistentError', 409, 'Already Exists']
+    ['ExistentError', 409, 'Already Exists'],
+    ['TooManyRequestsError', 429, 'Too Many Requests']
 ];
 
 errorTypes.forEach(([typeName, code, name]) => {
