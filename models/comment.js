@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
     {
-        author: { type: String, index: true, unique: true },
+        author: { type: String },
         content: { type: String }
     },
     { timestamps: true }
