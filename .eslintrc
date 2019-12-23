@@ -1,0 +1,92 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:security/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "node": true,
+    "jest": true,
+    "jest/globals": true,
+    "mongo": true,
+    "es6": true
+  },
+  "globals": {
+    "it": true,
+    "expect": true,
+    "describe": true,
+    "jest": true,
+    "process": true
+  },
+  "plugins": [
+    "import",
+    "security",
+    "jest"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module"
+  },
+  "rules": {
+    "camelcase": "warn",
+    "class-methods-use-this": "off",
+    "no-empty": "warn",
+    "no-shadow": "warn",
+    "import/order": "warn",
+    "global-require": "off",
+    "guard-for-in": "warn",
+    "no-console": "off",
+    "no-continue": "off",
+    "consistent-return": "off",
+    "no-restricted-syntax": "off",
+    "no-restricted-globals": "warn",
+    "no-prototype-builtins": "warn",
+    "radix": ["error", "as-needed"],
+    "semi": "error",
+    "no-underscore-dangle": "off",
+    "multiline-ternary": "warn",
+    "prefer-const": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-destructuring": "warn",
+    "prefer-spread": "error",
+    "no-unused-vars": "error",
+    "no-useless-constructor": "error",
+    "object-shorthand": "error",
+    "no-useless-rename": "error",
+    "no-nested-ternary": "warn",
+    "no-unreachable": "error",
+    "no-unused-expressions": "error",
+    "default-case": "error",
+    "no-param-reassign": "warn",
+    "no-duplicate-imports": "error",
+    "no-loop-func": "error",
+    "import/no-default-export": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.spec.js"]}],
+    "import/named": "error",
+    "no-extra-parens": "off",
+    "no-throw-literal": "error",
+    "one-var-declaration-per-line": "warn",
+    "no-unexpected-multiline": "error",
+    "operator-linebreak": "off",
+    "comma-dangle": ["error", "only-multiline"],
+    "comma-style": ["error", "last"],
+    "array-element-newline": ["error", "consistent"],
+    "newline-after-var": "warn",
+    "indent": ["warn", 4, {
+      "SwitchCase": 1
+    }],
+    "max-len": ["warn", { "code": 120 }],
+    "import/no-unresolved": "off",
+    "object-curly-spacing": ["error", "always"],
+    "keyword-spacing": ["error", {
+      "before": true,
+      "after": true
+    }],
+    "curly": ["error", "all"],
+    "block-spacing": ["error", "always"],
+    "react/sort-comp": "off",
+    "no-use-before-define": "off",
+    "no-trailing-spaces": "error",
+    "no-multiple-empty-lines": ["error", { "max": 1 }]
+  }
+}
