@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const { createServer } = require('../libs/httpServer');
 
-const { MONGO_CONNECT } = process.env;
+const { MONGO_CONNECT, MONGO_CONNECT_TEST } = process.env;
 
 const MONGO_OPTIONS = {
     connectTimeoutMS: 30000,
@@ -11,12 +12,16 @@ const MONGO_OPTIONS = {
     // useUnifiedTopology: true -> https://github.com/Automattic/mongoose/issues/8180
 };
 
-const connectWithRetry = () => {
+const connectWithRetry = app => {
+    const connectionString = process.env.NODE_ENV === 'test' ? MONGO_CONNECT_TEST : MONGO_CONNECT;
+
     console.log('Connecting to the DB...');
-    return mongoose.connect(MONGO_CONNECT, MONGO_OPTIONS, err => {
+    return mongoose.connect(connectionString, MONGO_OPTIONS, err => {
         if (err) {
             console.error('Retrying...');
             setTimeout(connectWithRetry, 5000);
+        } else {
+            createServer(app);
         }
     });
 };
@@ -32,7 +37,6 @@ mongoose.connection.on('error', error => {
     console.error('--------------');
 });
 
-connectWithRetry();
 mongoose.connectWithRetry = connectWithRetry;
 
 module.exports = mongoose;

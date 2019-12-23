@@ -25,7 +25,7 @@ const createServer = app => {
         console.log('Listening on ' + server.address().port);
     }
 
-    return app;
+    return server;
 };
 
 module.exports = { createServer };

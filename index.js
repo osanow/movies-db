@@ -8,8 +8,8 @@ const apiRequestRateLimiter = require('./libs/apiRequestRateLimiter');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { allowContentType } = require('./tools/allowContentType');
 const { NotFoundError } = require('./tools/errors');
-const { createServer } = require('./libs/httpServer');
 const mainConfig = require('./config/main');
+const mongoose = require('./libs/mongoose');
 
 const { PORT } = process.env;
 
@@ -30,4 +30,6 @@ app.use((req, res, next) => {
 
 app.use(errorHandler);
 
-module.exports = createServer(app);
+mongoose.connectWithRetry(app);
+
+module.exports = app;
