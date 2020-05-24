@@ -31,6 +31,8 @@ Security features:
 
 ## Little Summary
 
+**Recruitment project** / Dec 24, 2019
+
 Here it is! 
 
 After 3 days of intense development process finally I'm able to show you guys my little, *movies-db* API.
@@ -41,7 +43,7 @@ Minor things to do that I could see so far:
  - env's util with validation
  - logger util with better formatting, maybe some timestamps
  - more e2e tests for routes
- - **Swagger described routes**
+ - Swagger described routes
  - GET endpoint filtering ( queries, paging and so on )
  
  
